@@ -19,6 +19,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // The unit tests run inside the app: do not add a login item or a menu bar icon.
         guard ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil else { return }
         LoginItem.enableOnFirstLaunch()
+        // Lets the Mac sleep again if the app stopped while the watch was active.
+        watch.deactivate()
         statusItemController = StatusItemController(watch: watch, durations: durations)
         if UserDefaults.standard.bool(forKey: Settings.activateOnLaunch) {
             watch.activate(for: durations.defaultDuration)

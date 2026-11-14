@@ -12,15 +12,23 @@ final class Watch {
 
     var isActive: Bool { activeDuration != nil }
 
+    @ObservationIgnored private let sleepDisabledFlag = SleepDisabledFlag()
     @ObservationIgnored private var displaySleepAssertion = DisplaySleepAssertion()
     @ObservationIgnored private var timer: Timer?
 
+    /// Also changes the duration of an activation in progress. Does nothing if the user refuses the
+    /// administrator setup.
     func activate(for seconds: Int) {
-        deactivate()
-        if !UserDefaults.standard.bool(forKey: Settings.allowDisplaySleep) {
+        guard isActive || sleepDisabledFlag.set() else { return }
+        if UserDefaults.standard.bool(forKey: Settings.allowDisplaySleep) {
+            displaySleepAssertion.release()
+        } else {
             displaySleepAssertion.hold()
         }
         activeDuration = seconds
+        timer?.invalidate()
+        timer = nil
+        endDate = nil
         guard seconds != ActivationDurations.indefinite else { return }
         endDate = Date(timeIntervalSinceNow: TimeInterval(seconds))
         timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(seconds), repeats: false) { [weak self] _ in
@@ -28,12 +36,14 @@ final class Watch {
         }
     }
 
+    /// Also lets the Mac sleep again after the app stopped while the watch was active.
     func deactivate() {
         timer?.invalidate()
         timer = nil
         endDate = nil
         activeDuration = nil
         displaySleepAssertion.release()
+        sleepDisabledFlag.clear()
     }
 
     private func timerDidEnd() {
