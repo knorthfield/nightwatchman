@@ -9,6 +9,7 @@ final class StatusItemController: NSObject, NSMenuDelegate {
     private let menu = NSMenu()
     private let watch: Watch
     private let durations: ActivationDurations
+    private lazy var settingsWindow = SettingsWindow(durations: durations)
 
     init(watch: Watch, durations: ActivationDurations) {
         self.watch = watch
@@ -73,7 +74,15 @@ final class StatusItemController: NSObject, NSMenuDelegate {
         durationsItem.submenu = durationsMenu
 
         menu.addItem(.separator())
+        let settingsItem = menu.addItem(withTitle: "Settings…", action: #selector(showSettings), keyEquivalent: ",")
+        settingsItem.target = self
+        settingsItem.image = NSImage(systemSymbolName: "gear", accessibilityDescription: nil)
+        menu.addItem(.separator())
         menu.addItem(withTitle: "Quit Nightwatchman", action: #selector(NSApplication.terminate), keyEquivalent: "q")
+    }
+
+    @objc private func showSettings() {
+        settingsWindow.show()
     }
 
     @objc private func durationWasChosen(_ item: NSMenuItem) {
