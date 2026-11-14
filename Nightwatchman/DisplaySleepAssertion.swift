@@ -10,7 +10,7 @@ struct DisplaySleepAssertion {
         let result = IOPMAssertionCreateWithName(
             kIOPMAssertionTypePreventUserIdleDisplaySleep as CFString,
             IOPMAssertionLevel(kIOPMAssertionLevelOn),
-            "Nightwatchman keeps the Mac awake" as CFString,
+            "Night Watchman keeps the Mac awake" as CFString,
             &newID)
         if result == kIOReturnSuccess { assertionID = newID }
     }

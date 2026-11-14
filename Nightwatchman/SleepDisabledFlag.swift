@@ -92,7 +92,7 @@ final class SleepDisabledFlag {
         guard let rule = sudoersRule(user: NSUserName()) else { return false }
         let shellScript = "set -e; f=$(/usr/bin/mktemp); trap 'rm -f $f' EXIT; echo '\(rule)' > $f; "
             + "/usr/sbin/visudo -cf $f > /dev/null; /usr/bin/install -m 0440 -o root -g wheel $f \(sudoersPath)"
-        let prompt = "Nightwatchman keeps your Mac awake also when the lid is closed. For this, an administrator must permit it one time."
+        let prompt = "Night Watchman keeps your Mac awake also when the lid is closed. For this, an administrator must permit it one time."
         let appleScript = NSAppleScript(source: "do shell script \"\(shellScript)\" with prompt \"\(prompt)\" with administrator privileges")
         NSApp.activate()
         var errorInfo: NSDictionary?

@@ -68,7 +68,7 @@ struct SettingsView: View {
                 Text("Battery")
             } footer: {
                 Text(hasBattery
-                    ? "Nightwatchman keeps the Mac awake also when the lid is closed. A closed Mac that stays awake in a bag can get hot. If you start below the battery level or in Low Power Mode, that limit does not apply until you start again."
+                    ? "Night Watchman keeps the Mac awake also when the lid is closed. A closed Mac that stays awake in a bag can get hot. If you start below the battery level or in Low Power Mode, that limit does not apply until you start again."
                     : "This Mac has no battery.")
                     .foregroundStyle(.secondary)
             }

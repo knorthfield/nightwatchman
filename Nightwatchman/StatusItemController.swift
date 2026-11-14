@@ -27,7 +27,7 @@ final class StatusItemController: NSObject, NSMenuDelegate {
             let isActive = watch.isActive
             statusItem.button?.image = NSImage(
                 systemSymbolName: isActive ? "flashlight.on.fill" : "flashlight.off.fill",
-                accessibilityDescription: isActive ? "Nightwatchman, on" : "Nightwatchman, off")
+                accessibilityDescription: isActive ? "Night Watchman, on" : "Night Watchman, off")
             statusItem.button?.appearsDisabled = !isActive
             statusItem.button?.toolTip = isActive
                 ? "Click to let the Mac sleep.\nRight-click to show the menu."
@@ -79,7 +79,7 @@ final class StatusItemController: NSObject, NSMenuDelegate {
         settingsItem.target = self
         settingsItem.image = NSImage(systemSymbolName: "gear", accessibilityDescription: nil)
         menu.addItem(.separator())
-        menu.addItem(withTitle: "Quit Nightwatchman", action: #selector(NSApplication.terminate), keyEquivalent: "q")
+        menu.addItem(withTitle: "Quit Night Watchman", action: #selector(NSApplication.terminate), keyEquivalent: "q")
     }
 
     @objc private func showSettings() {

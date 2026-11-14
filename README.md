@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="docs/icon.png" width="128" height="128" alt="Nightwatchman icon">
+  <img src="docs/icon.png" width="128" height="128" alt="Night Watchman icon">
 </p>
 
-# Nightwatchman
+# Night Watchman
 
 Keeps your Mac awake from the menu bar, also when the lid is closed.
 
@@ -14,7 +14,7 @@ Keeps your Mac awake from the menu bar, also when the lid is closed.
 - **Battery limits.** The watch stops at a low battery level (20 % at first) and when Low Power Mode
   comes on.
 
-Nightwatchman does the job of [KeepingYouAwake](https://github.com/newmarcel/KeepingYouAwake), which
+Night Watchman does the job of [KeepingYouAwake](https://github.com/newmarcel/KeepingYouAwake), which
 gave the idea. It is written again in Swift and adds the closed lid.
 
 ## Install
@@ -29,7 +29,7 @@ brew install --cask knorthfield/tap/nightwatchman
 
 Or download `Nightwatchman.zip` from the
 [latest release](https://github.com/knorthfield/nightwatchman/releases/latest), unzip it, and move
-`Nightwatchman.app` to Applications.
+`Night Watchman.app` to Applications.
 
 ## Use
 
@@ -39,12 +39,12 @@ Or download `Nightwatchman.zip` from the
   [How it works](#how-it-works). If you cancel, the watch stays off.
 - **Settings…** has: Open at Login, Activate on Launch, Allow Display Sleep, Quit When the Timer
   Ends, the durations, and the battery limits.
-- Nightwatchman opens at login. To stop this, turn off **Open at Login** in Settings.
+- Night Watchman opens at login. To stop this, turn off **Open at Login** in Settings.
 
 ## How it works
 
 macOS has one setting that stops all sleep, also with the lid closed: `pmset -a disablesleep 1`.
-Only root can change it. The first time, Nightwatchman asks for an administrator and installs the
+Only root can change it. The first time, Night Watchman asks for an administrator and installs the
 file `/etc/sudoers.d/nightwatchman`. This file lets your user run these two commands, and no others,
 without a password:
 
@@ -53,18 +53,18 @@ without a password:
 /usr/bin/pmset -a disablesleep 1
 ```
 
-While the watch is on, Nightwatchman also keeps the display on, unless **Allow Display Sleep** is on.
+While the watch is on, Night Watchman also keeps the display on, unless **Allow Display Sleep** is on.
 
 ### Safety
 
 A closed Mac that stays awake in a bag can get hot, and the battery goes down.
 
-- Nightwatchman sets `disablesleep` back to 0 when the watch stops, when you quit, and when the
+- Night Watchman sets `disablesleep` back to 0 when the watch stops, when you quit, and when the
   timer ends.
-- If Nightwatchman crashes or you force it to quit, a small watchdog process sets it back to 0
+- If Night Watchman crashes or you force it to quit, a small watchdog process sets it back to 0
   in some seconds.
 - The setting stays after a restart of the Mac. If the Mac restarts while the watch is on,
-  Nightwatchman sets it back to 0 when it opens at login.
+  Night Watchman sets it back to 0 when it opens at login.
 - While the watch is on, the **Sleep** command in the Apple menu does not work.
 - All apps that run as your user can run the two commands above.
 - Apple does not document `disablesleep`, and can change it.
@@ -74,7 +74,7 @@ To see the setting: `pmset -g | grep SleepDisabled`. To set it back yourself:
 
 ### Uninstall
 
-Click the torch icon to turn the watch off, right-click it and click **Quit Nightwatchman**. Then:
+Click the torch icon to turn the watch off, right-click it and click **Quit Night Watchman**. Then:
 
 ```sh
 brew uninstall --zap --cask nightwatchman

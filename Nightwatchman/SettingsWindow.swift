@@ -12,7 +12,7 @@ final class SettingsWindow {
             backing: .buffered,
             defer: true
         )
-        window.title = "Nightwatchman Settings"
+        window.title = "Night Watchman Settings"
         window.isReleasedWhenClosed = false
         window.contentViewController = NSHostingController(rootView: SettingsView(durations: durations))
     }
