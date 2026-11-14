@@ -21,7 +21,15 @@ gave the idea. It is written again in Swift and adds the closed lid.
 
 Needs a Mac with Apple silicon and macOS 26 or later.
 
-There is no release yet. Build the app as described in [Build](#build).
+With [Homebrew](https://brew.sh):
+
+```sh
+brew install --cask knorthfield/tap/nightwatchman
+```
+
+Or download `Nightwatchman.zip` from the
+[latest release](https://github.com/knorthfield/nightwatchman/releases/latest), unzip it, and move
+`Nightwatchman.app` to Applications.
 
 ## Use
 
@@ -66,7 +74,14 @@ To see the setting: `pmset -g | grep SleepDisabled`. To set it back yourself:
 
 ### Uninstall
 
-Quit Nightwatchman, move the app to the Trash, then remove the sudoers file and the settings:
+Click the torch icon to turn the watch off, right-click it and click **Quit Nightwatchman**. Then:
+
+```sh
+brew uninstall --zap --cask nightwatchman
+```
+
+`--zap` also removes the settings and the sudoers file. Without Homebrew, move the app to the
+Trash, then:
 
 ```sh
 sudo rm /etc/sudoers.d/nightwatchman
