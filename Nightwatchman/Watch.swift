@@ -15,11 +15,16 @@ final class Watch {
     @ObservationIgnored private let sleepDisabledFlag = SleepDisabledFlag()
     @ObservationIgnored private var displaySleepAssertion = DisplaySleepAssertion()
     @ObservationIgnored private var timer: Timer?
+    @ObservationIgnored private var powerCheckTimer: Timer?
+    @ObservationIgnored private var powerStateAtActivation = PowerState.current
 
     /// Also changes the duration of an activation in progress. Does nothing if the user refuses the
     /// administrator setup.
     func activate(for seconds: Int) {
-        guard isActive || sleepDisabledFlag.set() else { return }
+        if !isActive {
+            guard sleepDisabledFlag.set() else { return }
+            startPowerChecks()
+        }
         if UserDefaults.standard.bool(forKey: Settings.allowDisplaySleep) {
             displaySleepAssertion.release()
         } else {
@@ -42,8 +47,23 @@ final class Watch {
         timer = nil
         endDate = nil
         activeDuration = nil
+        powerCheckTimer?.invalidate()
+        powerCheckTimer = nil
         displaySleepAssertion.release()
         sleepDisabledFlag.clear()
+    }
+
+    /// The battery level changes slowly, thus a check each minute is sufficient.
+    private func startPowerChecks() {
+        powerStateAtActivation = .current
+        powerCheckTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
+            Task { @MainActor in
+                guard let self else { return }
+                if PowerCutOff.fromSettings.mustDeactivate(now: .current, atActivation: self.powerStateAtActivation) {
+                    self.deactivate()
+                }
+            }
+        }
     }
 
     private func timerDidEnd() {
