@@ -1,0 +1,52 @@
+name: Nightwatchman
+options:
+  bundleIdPrefix: com.krisnorthfield
+  deploymentTarget:
+    macOS: "26.0"
+  createIntermediateGroups: true
+configFiles:
+  Debug: Local.xcconfig
+  Release: Local.xcconfig
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    # Apple Silicon only. Support: the current macOS and the one before it (now 27 and 26).
+    ARCHS: arm64
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    CODE_SIGN_STYLE: Automatic
+    GENERATE_INFOPLIST_FILE: NO
+    ENABLE_HARDENED_RUNTIME: YES
+    ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+targets:
+  Nightwatchman:
+    type: application
+    platform: macOS
+    sources:
+      - Nightwatchman
+    info:
+      path: Nightwatchman/Info.plist
+      properties:
+        CFBundleDisplayName: Nightwatchman
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSUIElement: true
+        LSApplicationCategoryType: public.app-category.utilities
+  NightwatchmanTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - NightwatchmanTests
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: Nightwatchman
+schemes:
+  Nightwatchman:
+    build:
+      targets:
+        Nightwatchman: all
+    test:
+      targets:
+        - NightwatchmanTests
