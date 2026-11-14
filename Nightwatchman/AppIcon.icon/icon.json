@@ -9,24 +9,44 @@
     {
       "layers": [
         {
-          "glass": false,
-          "image-name": "flame.svg",
-          "name": "flame"
+          "glass": true,
+          "image-name": "core.svg",
+          "name": "core"
         },
         {
-          "glass": false,
+          "glass": true,
+          "image-name": "flame.svg",
+          "name": "flame"
+        }
+      ],
+      "name": "flame",
+      "shadow": {
+        "kind": "layer-color",
+        "opacity": 0.6
+      },
+      "specular": true,
+      "translucency": {
+        "enabled": true,
+        "value": 0.25
+      }
+    },
+    {
+      "layers": [
+        {
+          "glass": true,
           "image-name": "frame.svg",
           "name": "frame"
         }
       ],
-      "name": "content",
+      "name": "frame",
       "shadow": {
         "kind": "neutral",
-        "opacity": 0.3
+        "opacity": 0.5
       },
+      "specular": true,
       "translucency": {
-        "enabled": false,
-        "value": 0
+        "enabled": true,
+        "value": 0.6
       }
     },
     {
