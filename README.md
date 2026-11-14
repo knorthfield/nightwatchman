@@ -33,7 +33,7 @@ Or download `Nightwatchman.zip` from the
 
 ## Use
 
-- Click the icon to turn the watch on or off. The torch is on while the Mac stays awake.
+- Click the icon to turn the watch on or off. The icon is bright while the Mac stays awake, and dimmed when the Mac can sleep.
 - Right-click the icon, or click with Option or Control, to open the menu.
 - The first time that you turn the watch on, macOS asks for an administrator. See
   [How it works](#how-it-works). If you cancel, the watch stays off.

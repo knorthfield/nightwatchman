@@ -28,6 +28,7 @@ final class StatusItemController: NSObject, NSMenuDelegate {
             statusItem.button?.image = NSImage(
                 systemSymbolName: isActive ? "flashlight.on.fill" : "flashlight.off.fill",
                 accessibilityDescription: isActive ? "Nightwatchman, on" : "Nightwatchman, off")
+            statusItem.button?.appearsDisabled = !isActive
             statusItem.button?.toolTip = isActive
                 ? "Click to let the Mac sleep.\nRight-click to show the menu."
                 : "Click to keep the Mac awake.\nRight-click to show the menu."
