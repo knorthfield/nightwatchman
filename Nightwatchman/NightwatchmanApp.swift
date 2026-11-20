@@ -14,6 +14,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let watch = Watch()
     private let durations = ActivationDurations()
     private var statusItemController: StatusItemController?
+    // A relaunch stops the watch, so it waits until the watch is not active.
+    private lazy var updateRelauncher = UpdateRelauncher(isBusy: { [watch] in watch.isActive })
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // The unit tests run inside the app: do not add a login item or a menu bar icon.
@@ -25,6 +27,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if UserDefaults.standard.bool(forKey: Settings.activateOnLaunch) {
             watch.activate(for: durations.defaultDuration)
         }
+        updateRelauncher.start()
     }
 
     func applicationWillTerminate(_ notification: Notification) {
