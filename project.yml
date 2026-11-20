@@ -12,8 +12,8 @@ settings:
     SWIFT_VERSION: "6.0"
     # Apple Silicon only. Support: the current macOS and the one before it (now 27 and 26).
     ARCHS: arm64
-    MARKETING_VERSION: "1.2"
-    CURRENT_PROJECT_VERSION: "3"
+    MARKETING_VERSION: "1.3"
+    CURRENT_PROJECT_VERSION: "4"
     CODE_SIGN_STYLE: Automatic
     GENERATE_INFOPLIST_FILE: NO
     ENABLE_HARDENED_RUNTIME: YES
